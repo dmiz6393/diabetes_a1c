@@ -107,7 +107,7 @@ We have 273,485 rows of data and 8 columns. This data represents 1,099 patients.
 
 I decided to try both regression and classification modeling. Regression would be used to predict the patient's average a1c score. Classification would be used to predict whether or not the patient is controlled or uncontrolled.  
 
-    - Linear regression was used to predict average a1c for each patient. The score here on the the training set: 0.07655737557026987 and the score on the test set: 0.08884825793752982
+   - Linear regression was used to predict average a1c for each patient. The score here on the the training set: 0.07655737557026987 and the score on the test set: 0.08884825793752982
     - Our baseline score for classification was .60. Logistic regression had a score on the training set: 0.6754057428214731 and score on the test set: 0.6367041198501873. From this model, we can make a few inferences: 
         - As average time between visits increases by 1, someone is about 1.002 times as likely to be controlled.
         - As age increases by 1, someone is about 1.002 times as likely to be controlled.
