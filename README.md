@@ -106,6 +106,7 @@ The task at hand was more challenging given how the data was gathered, stored, a
 ## Future Work
 
 I believe we can draw stronger conclusions if: 
+
 - We could run a randomized experiment where patients had to come in every 1 month or 3 months and get their bloodwork done on the date of visit, to test the hypothesis that more frequent visits meant lower a1c levels. 
 - The data was put together differently; Having one row per patient would have given us more clarity with how to approach modelling. 
 
