@@ -24,23 +24,14 @@ The clinic's senior data analyst provided me with anonymized data (HIPPA complia
 | visit_date| datetime |   cleaned_data.csv  | Cleaned |
 | summary | object|   cleaned_data.csv |  Cleaned |
 | obs_date | datetime|   cleaned_data.csv |  Cleaned |
-|------|------|------|------|
 | a1c | float|   cleaned_data.csv |  Cleaned |
-|------|------|------|------|
 | a1c_level | float|   cleaned_data.csv |  Cleaned |
-|------|------|------|------|
 | patient_id| float|  new_df.csv  | Cleaned |
-|------|------|------|------|
 | age | float|   new_df.csv |  Cleaned |
-|------|------|------|------|
 | num_visits | float|   new_df.csv |  Cleaned |
-|------|------|------|------|
 | avg_time_between_visits | float|   new_df.csv |  Cleaned |
-|------|------|------|------|
 | avg_a1c | float|   new_df.csv |  Cleaned |
-|------|------|------|------|
 | avg_control_level| float|   new_df.csv |  Cleaned |
-|------|------|------|------|
 | num_obs| float|   new_df.csv |  Cleaned |
 
 Our success can be validated if we are able to answer the following: 
@@ -96,13 +87,14 @@ We have 273,485 rows of data and 8 columns. This data represents 1,099 patients.
 I decided to try both regression and classification modeling. Regression would be used to predict the patient's average a1c score. Classification would be used to predict whether or not the patient is controlled or uncontrolled.  
 
    - Linear regression was used to predict average a1c for each patient. The score here on the the training set: 0.07655737557026987 and the score on the test set: 0.08884825793752982
-    - Our baseline score for classification was .60. Logistic regression had a score on the training set: 0.6754057428214731 and score on the test set: 0.6367041198501873. From this model, we can make a few inferences: 
+   
+   - Our baseline score for classification was .60. Logistic regression had a score on the training set: 0.6754057428214731 and score on the test set: 0.6367041198501873. From this model, we can make a few inferences: 
         - As average time between visits increases by 1, someone is about 1.002 times as likely to be controlled.
         - As age increases by 1, someone is about 1.002 times as likely to be controlled.
         - As num visits increases by 1, someone is about 1.04 times as likely to be controlled.
         - As person has more bw obs done, they are less likely to be in the positive class/ controlled (.36 times as likely to be negative class) 
       -Decision Tree Classifier gave us a sensitivity of 0.3652 and specificity of 0.7237. 
-      - NLP 
+      - NLP best score: .6354556803995006
      
  
 ## Conclusions and Limitations
