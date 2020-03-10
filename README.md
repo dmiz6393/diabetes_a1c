@@ -12,29 +12,17 @@ The clinic's senior data analyst provided me with anonymized data (HIPPA complia
 | Feature | Type   | Dataset| Description  |
 |------|------|------|------|
 |   PatientId  | object|   A1c_Data_Requesta1c.csv | Original dataset patient id |
-|------|------|------|------|
 |   Age  | object|   A1c_Data_Requesta1c.csv  | Original dataset patient age |
-|------|------|------|------|
 |  Birthdate  | object|  A1c_Data_Requesta1c.csv  | Original dataset patient date of birth|
-|------|------|------|------|
 |   VisitDate  | object|   A1c_Data_Requesta1c.csv  | Original dataset visit dates of patient|
-|------|------|------|------|
 | SUMMARY  | object|   A1c_Data_Requesta1c.csv  |   Original dataset summary of patient visit|
-|------|------|------|------|
 |  OBSDATE  | object|   A1c_Data_Requesta1c.csv |  Original dataset date patient got bloodwork done|
-|------|------|------|------|
 |  Date of A1c | object|  A1c_Data_Requesta1c.csv  |  Original dataset patient a1c levels|
-|------|------|------|------|
 |  Insurance | object|   A1c_Data_Requesta1c.csv |  Original dataset patient insurance information |
-|------|------|------|------|
 | patient_id | int |   cleaned_data.csv |  Cleaned |
-|------|------|------|------|
 | age | float|  cleaned_data.csv  |  Cleaned|
-|------|------|------|------|
 | visit_date| datetime |   cleaned_data.csv  | Cleaned |
-|------|------|------|------|
 | summary | object|   cleaned_data.csv |  Cleaned |
-|------|------|------|------|
 | obs_date | datetime|   cleaned_data.csv |  Cleaned |
 |------|------|------|------|
 | a1c | float|   cleaned_data.csv |  Cleaned |
