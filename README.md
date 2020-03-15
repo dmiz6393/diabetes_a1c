@@ -4,7 +4,27 @@
 
 ## Problem Statement
 
-A non profit clinic wants to know whether or not how frequently a patient comes in for a visit is a determining factor in their overall A1c level. If a patient comes in more frequently, is there a higher likelihood that their A1c level is controlled? 
+A non profit clinic wants to know whether or not frequency of patient visits has an impact on their overall A1c level. If a patient's A1c level is at or above 8, they are categorized as being uncontrolled. This is an unhealthy state for a diabetic individual to be in, and they are advised to take action to decrease it. If a patient comes in more frequently, is there a higher likelihood that their A1c level is controlled? Although correlation does not imply causation, we'd like to explore potential patterns in the data.
+
+Our success can be validated if we are able to answer the following: 
+
+1. Are patients more likely to have a lower and controlled A1c if they visit more frequently?
+2. Can we predict based off of frequency of visits or time in between visits, what the patient's A1c is?
+3. Might factors like age also have an impact on A1c levels? 
+4. Since we have access to the summary of the patient visits, I also think it's worthwhile to use natural language processing in an attempt to predict control level.  
+
+To get a better understanding of a1c levels, you can find an accurate depiction here: https://www.thediabetescouncil.com/wp-content/uploads/2016/09/IG-2-1-e1474921980344.jpg. This clinic considered any a1c level above 8 as uncontrolled. 
+
+## Table of Contents
+1. Data Gathering
+    1. [Yelp](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/code/01_Yelp_Restaurant_Data_Gathering.ipynb)
+2. Data Cleaning
+    1. [Yelp](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/code/02_Yelp_Restaurant_Data_Cleaning.ipynb)
+    2. [IRS](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/code/03_IRS_Data_Cleaning.ipynb)
+    3. [CT Gov](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/code/04_CT_Income_Data_Cleaning.ipynb)
+3. [Combine Data](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/code/05_Combining_Data.ipynb)
+4. [Exploratory Data Analysis](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/code/06_EDA.ipynb)
+5. [Modelling](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/code/07_Modeling.ipynb)
 
 The clinic's senior data analyst provided me with anonymized data (HIPPA compliant) that included the following: 
 
@@ -12,7 +32,8 @@ The clinic's senior data analyst provided me with anonymized data (HIPPA complia
 | Feature | Type   | Dataset| Description  |
 |------|------|------|------|
 |   PatientId  | object|   A1c_Data_Requesta1c.csv | Original dataset patient id |
-|   Age  | object|   A1c_Data_Requesta1c.csv  | Original dataset patient age |
+|   Age  | object|   A1c_Data_Requesta1c.csv  | Original dataset patient age 
+iuytr
 |  Birthdate  | object|  A1c_Data_Requesta1c.csv  | Original dataset patient date of birth|
 |   VisitDate  | object|   A1c_Data_Requesta1c.csv  | Original dataset visit dates of patient|
 | SUMMARY  | object|   A1c_Data_Requesta1c.csv  |   Original dataset summary of patient visit|
@@ -34,38 +55,33 @@ The clinic's senior data analyst provided me with anonymized data (HIPPA complia
 | avg_control_level| float|   new_df.csv |  Cleaned |
 | num_obs| float|   new_df.csv |  Cleaned |
 
-Our success can be validated if we are able to answer the following: 
+### Data Files
+- [combined_1.csv - first set of features with IRS data](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_1.csv) 
+- [combined_2.csv - second set of features with IRS data](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_2.csv) 
+- [combined_3.csv - first set of features with CT Gov data](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_3.csv)
+- [combined_4.csv - second set of features with CT Gov data](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_4.csv)
 
-1. Are patients more likely to have a lower and more controlled A1c if they have visited more frequently?
-2. Can we predict based off of frequency of visits or last visit, what the patient's A1c is?
-3. Might factors like age also have an impact on A1c levels? 
-4. Since we have access to the summary of the patient visits, I also think it's worthwhile to use natural language processing in an attempt to predict control level.  
 
-To get a better understanding of a1c levels, you can find an accurate depiction here: https://www.thediabetescouncil.com/wp-content/uploads/2016/09/IG-2-1-e1474921980344.jpg   
-
-This clinic considered any a1c level above 8 as uncontrolled. 
 
 ## Executive Summary
 
 I analyzed and cleaned the data, then built a model using the following process: 
 
-### Data Cleaning
-We have 273,485 rows of data and 8 columns. This data represents 1,099 patients. When cleaning the data, we need to consider the following:
-
-#### Data normalization: a process where data in a database is organized in a way that the user can utilize it to conduct analysis and answer questions. This process entails eliminating redundancy and logically group data together. 
+### Data Cleaning and Normalization 
+We have 273,485 rows of data and 8 columns. This data represents 1,099 patients. This is the process I took to normalize and clean the data: 
 
 #### Data Clean
-   - Changed column names so I could more easily work with data
+   - Changed column names 
    - Drop rows where A1c is null, since there were only 32 our of 273,485 rows
    - Change data types to represent datetime columns (observation date and visit date) and objects to floats. 
    - Remove or fix outliers: found a minimum too low for A1c. Changed .098 to 8.9 and dropped 1.7 
-   - Create an additional column that marks each patients A1c as controlled as 1 or uncontrolled at 0 (dummy)
+   - Create an additional column that marks each patients A1c as controlled as our positive class 1 or uncontrolled as our negative class 0 
    - Each patient has multiple types of insurances listed, and we are unsure which is the most updated one or what many of them mean. For this reason, we have to eliminate this column for further analysis.
    
 #### Data Split 
-   - This data was not normalized, there are two dataframes grouped together in one in a way that doesn't make sense. One is responsible for a1c and when bloodwork was done, and the other holds information only on office visits. This also created many duplicates in the original dataset
+   - This data was not normalized, there are two dataframes grouped together in a way that makes it difficult to analyze. One is responsible for a1c and when bloodwork was done, and the other holds information only on office visits. This also created many duplicates in the original dataset
     - I split the data into two dataframes and dropped the duplicates in each. One containing visit information, and the other containing bloodwork information 
-    - This revealed that people come in a lot more frequently than they get their blood work taken. Originally having 61943 rows in each dataframe, I ended up with 3617 for bloodwork and 14197 for visit information. 
+    - In doing so, I discovered that people come in a lot more frequently than they get their blood work taken. Originally having 61943 rows in each dataframe, I ended up with 3617 for bloodwork and 14197 for visit information. 
     
 ### Feature Engineering
    - I created a function to count how many unique visits and unique observation dates each patient had. That way, we could use the total number per each patient to see if this has an impact on A1c levels 
@@ -76,15 +92,15 @@ We have 273,485 rows of data and 8 columns. This data represents 1,099 patients.
 
    - Built a heatmap to see any strong correlations between a1c and other columns. 
    - Looked at average control level and average time between visits on a bar plot
-   - Average control level and number of visits on a bar plot
+   - Plotted average control level(controlled or uncontrolled) and number of visits on a bar plot
    - Clustering to find patterns in data  
-   - Looking at most frequently used words in both controlled and uncontrolled
-   - Looking at most frequently used words in controlled
-   - Looking at most frequently used words in uncontrolled
+   - Looked at most frequently used words in both controlled and uncontrolled
+   - Looked at most frequently used words in controlled
+   - Looked at most frequently used words in uncontrolled
  
 ## Modeling
 
-I decided to try both regression and classification modeling. Regression would be used to predict the patient's average a1c score. Classification would be used to predict whether or not the patient is controlled or uncontrolled.  
+I decided to try both regression and classification modeling. Regression would be used to predict the patient's average a1c score. Classification would be used to predict whether or not the patient on average was controlled or uncontrolled.  
 
    - Linear regression was used to predict average a1c for each patient. The score here on the the training set: 0.07655737557026987 and the score on the test set: 0.08884825793752982
    
@@ -99,7 +115,7 @@ I decided to try both regression and classification modeling. Regression would b
  
 ## Conclusions and Limitations
 
-Our best score (.64) still isn't that much better than baseline (.60). Against initial thinking and on a very superficial level, we could draw the conclusion that the more time in between each patient, the more likely that patient will be controlled.  
+Our best accuracy score is .64, which still isn't that much better than our baseline score of .60. Against initial thinking and on a very superficial level, we could draw the conclusion that the more time in between each patient, the more likely that patient will be controlled.  
 
 The task at hand was more challenging given how the data was gathered, stored, and pulled. The inconsistency of visits and when blood work is drawn is also a limitation. 
 
@@ -109,5 +125,7 @@ I believe we can draw stronger conclusions if:
 
 - We could run a randomized experiment where patients had to come in every 1 month or 3 months and get their bloodwork done on the date of visit, to test the hypothesis that more frequent visits meant lower a1c levels. 
 - The data was put together differently; Having one row per patient would have given us more clarity with how to approach modelling. 
+
+Correlation does not mean causation - perhaps the patients who on average are controlled, come in for fewer visits since they don't feel the need to see a doctor. 
 
 I'd like to go back to make sure I've written my code efficiently. There are a few functions where I manipulate my data that could be more performative. For further investigation, we would need to do some hypothesis testing. I am going to continue to feature engineer to see if we've missed any important features that, when put together, impact a1c. I'd also like to experiment with cleaning the data differently - perhaps using the average levels for a1c and average time between visits wasn't the best approach. 
