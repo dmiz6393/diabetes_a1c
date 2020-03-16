@@ -82,6 +82,8 @@ We have 273,485 rows of data and 8 columns. This data represents 1,099 patients.
     - In doing so, I discovered that people come in a lot more frequently than they get their blood work taken. Originally having 61943 rows in each dataframe, I ended up with 3617 for bloodwork and 14197 for visit information. 
     
 ### Feature Engineering
+Since there were a few things done to manipulate the data, there are 3 notebooks dedicated to feature engineering. This was done so that when I or anyone else come back to the project, certain functions that take some time to run to always have to be rerun. The updated data is saved in a csv for this reason.  
+
    - I created a function to count how many unique visits and unique observation dates each patient had. That way, we could use the total number per each patient to see if this has an impact on A1c levels 
    - I built a function that calculated time between visits, and then from this the average time in between visits to be used as a feature for predicting whether or not the patient would be controlled or uncontrolled. 
    - To model using NLP, I combined and stemmed all summary text together and added it to each respective patient's row. 
@@ -89,20 +91,22 @@ We have 273,485 rows of data and 8 columns. This data represents 1,099 patients.
 
 ### EDA:
 
-   - Built a heatmap to see any strong correlations between a1c and other columns. 
-   - Looked at average control level and average time between visits on a bar plot
-   - Plotted average control level(controlled or uncontrolled) and number of visits on a bar plot
-   - Clustering to find patterns in data  
+   - Built a heatmap to see any strong correlations between a1c and other columns. Although heatmaps shouldn't usually be used with data concerning health, I was curious to see if there would be any type of correlation with a1c. The chart doesn't show that there is.
+   - Looked at average control level and average time between visits on a bar plot. There didn't seem to be a significant difference between number of visits and control level.
+   - Plotted average control level(controlled or uncontrolled) and number of visits on a bar plot. Most of our data points are clustered to the bottom left hand side with a few outliers.
+   - Clustering by average time between visits: we see there is a pattern in how much time patients take to come back for a visit, but this doesn't show a difference in their a1c levels. 
+   - Plotting histogtams to see if features in our data follow a normal distribution: it doesn't. 
    - Looked at most frequently used words in both controlled and uncontrolled
    - Looked at most frequently used words in controlled
    - Looked at most frequently used words in uncontrolled
+       - Words like hypertension, diabetes, lab, check and refill appear to be in both controlled and uncontrolled groups. I didn't see any major differences in language used for each type of patient.
  
 ## Modeling
 
 I decided to try both regression and classification modeling. Regression would be used to predict the patient's average A1c score. Classification would be used to predict whether or not the patient on average was controlled or uncontrolled. 
 
 ### Linear Regression
-Linear regression was used to predict average a1c for each patient.
+Linear regression was used to predict average a1c for each patient. It is also worth noting that with this type of data, it is unlikely that all MLR assumptions are being met. 
 
 How well does the model predict average a1c if we just use average time between visits and number of visits for our features? 
 We get a score on the training set of 0.006 and 0.0116 on the testing set. If we add in age and number of observations,  we still get a low score on the training set of 0.076 and a score of 0.088 on the testing set. The score doesn't change even when we round our a1c levels.
@@ -110,7 +114,7 @@ We get a score on the training set of 0.006 and 0.0116 on the testing set. If we
 ### Logistic Regression
 Next I wanted to see if we could better predict average control level (whether or not on average, a patient is controlled or uncontrolled) using logistic regression. Our baseline score for classification was .60. Logistic regression had a score on the training set of 0.675 and score on the test set of 0.636. 
 
-From this model, we can make a few inferences: 
+From this model, we can make a few (relatively unhelpful) inferences: 
         - As average time between visits increases by 1 day, someone is about 1.002 times as likely to be controlled.
         - As age increases by 1, someone is about 1.002 times as likely to be controlled.
         - As num visits increases by 1, someone is about 1.04 times as likely to be controlled.
@@ -121,7 +125,8 @@ From this model, we can make a few inferences:
 The Decision Tree Classifier gave us a sensitivity of 0.3652 and specificity of 0.7237. Using gridsearch, our best score on the testing set was .57. In a healthcare setting, usually you want to optimize for sensitivity. Here, our specificity score (optimizing for true negatives) is much higher than our sensitivity score (optimizing for true positives). We would rather tell a patient who is controlled that they are not as opposed to telling a patient they are controlled when they are not. 
 
 ### Random Forest Classifier 
-With Random Forest Classifier, we will attempt to optimize for sensitivity using Kevin Arvai's post and code on how to optimize for sensitivity: https://towardsdatascience.com/fine-tuning-a-classifier-in-scikit-learn-66e048c21e65. Kevin talks about two ways to optimize for sensitivity, we use the first he mentions in the post: GridSearchCV to tune your model by searching for the best hyperparameters and keeping the classifier with the highest recall score. Using this, we still end up with an accuracy score close to baseline and a recall score of .209. 
+
+In a healthcare setting, usually you want to optimize for sensitivity. Here, our specificity score (optimizing for true negatives) is much higher than our sensitivity score (optimizing for true positives). We would rather tell a patient who is controlled that they are not as opposed to telling a patient they are controlled when they are not. With Random Forest Classifier, we will attempt to optimize for sensitivity using Kevin Arvai's post and code on how to optimize for sensitivity: https://towardsdatascience.com/fine-tuning-a-classifier-in-scikit-learn-66e048c21e65. Kevin talks about two ways to optimize for sensitivity, we use the first he mentions in the post: GridSearchCV to tune your model by searching for the best hyperparameters and keeping the classifier with the highest recall score. Using this, we still end up with an accuracy score close to baseline and a recall score of .209. 
 
 ### Natural Language Processing on summary text for patient visits
 
@@ -145,7 +150,7 @@ Finally, correlation does not mean causation - perhaps the patients who on avera
 I believe we can draw stronger conclusions if we could run a randomized experiment where patients had to come in every 1 month or 3 months for a visit and must get their bloodwork done on the date of visit. This would allow us to more accurately test the hypothesis that more frequent visits meant lower a1c levels. I'd also like to conduct more research to understand all factors that contribue to a patient's A1c level.  
 
 ### Data Normalization 
-The data was put together differently; Having one row per patient would have given us more clarity with how to approach modelling. Perhaps having data on fewer patients but in an organized manner would also help with this type of analysis 
+The data was put together differently; Having one row per patient would have given us more clarity with how to approach modelling. Additionally, I'd like to look at each individual patient's data as a whole. Was the patient's a1c lower when they waited less time for their next visit? Perhaps having data on fewer patients but in an organized manner would also help with this type of analysis, as opposed to grouping everything together. 
 
 
 ### Clean Code 
