@@ -146,6 +146,20 @@ It is difficult to make any solid conclusions from this analysis given the limit
 
 Finally, correlation does not mean causation - perhaps the patients who on average are controlled, come in for fewer visits since they don't feel the need to see a doctor. 
 
+To answer the questions we states above: 
+1. Are patients more likely to have a lower and controlled A1c if they visit more frequently?
+It doesn't look like it from an initial analysis, but we need more information. 
+
+2. Can we predict based off of frequency of visits or time in between visits, what the patient's A1c is?
+Not really, but we could possibly if we run an experiment. 
+
+3. Might factors like age also have an impact on A1c levels? 
+It seems like this might have a small impact, but not so significant (see above for inferences)
+
+4. Since we have access to the summary of the patient visits, I also think it's worthwhile to use natural language processing in an attempt to predict control level.  
+
+NLP also didn't perform that much better than our baseline score. 
+
 
 ## Future Work
 
