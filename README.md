@@ -57,8 +57,10 @@ The clinic's senior data analyst provided me with anonymized data (HIPPA complia
 - [cleaned_data.csv - cleaned dataset](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/cleaned_data.csv) 
 - [date_a1c_df.csv- dataset with  observation date and a1c levels](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/date_a1c_df)
 - [new_df.csv - dataset used for modeling, each row represents a different patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/new_df)
-- [sorted_sum_data.csv - dataset that includes patient visit information](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/sorted_sum_data.csv)
+- [sorted_sum_data.csv - dataset that includes patient visit information,average time between visits, and average a1c for each patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/sorted_sum_data.csv)
 - [summary_and_visit_df.csv - dataset that includes patient visit information](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/summary_and_visit_df)
+- [sorted_summary_with_avg_visits.csv - dataset that includes patient visit information and average time between visits for each patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/summary_and_visit_df)
+
 
 
 ## Executive Summary
