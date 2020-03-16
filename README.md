@@ -17,12 +17,13 @@ To get a better understanding of a1c levels, you can find an accurate depiction 
 
 ## Table of Contents
 1. [Data Cleaning](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/1_Data_Clean.ipynb)
-3. [Data Cleaning and Spliting Data](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/2_Data_Clean_and_Split.ipynb)
+2. [Data Cleaning and Spliting Data](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/2_Data_Clean_and_Split.ipynb)
 3. [Feature Engineering](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/3_Feature_Engineering.ipynb)
-3. [Feature Engineering](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/4_Feature_Engineering.ipynb)
-3. [Feature Engineering](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/5_Feature_Engineering.ipynb)
-4. [Exploratory Data Analysis](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/6_Exploratory_Data_Analysis%20.ipynb)
-5. [Modeling](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/7_Modeling.ipynb)
+4. [Feature Engineering](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/4_Feature_Engineering.ipynb)
+5. [Feature Engineering](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/5_Feature_Engineering.ipynb)
+6. [Exploratory Data Analysis](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/6_Exploratory_Data_Analysis%20.ipynb)
+7. [Modeling](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/7_Modeling.ipynb)
+8. [NLP and Modeling](https://github.com/dmiz6393/diabetes_a1c/blob/master/code/8_NLP.ipynb)
 
 The clinic's senior data analyst provided me with anonymized data (HIPPA compliant) that included the following: 
 
@@ -55,11 +56,11 @@ The clinic's senior data analyst provided me with anonymized data (HIPPA complia
 ### Data Files: What each file represents
 - [A1c_Data_Requesta1c.csv - original dataset](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/A1c_Data_Requesta1c.csv)
 - [cleaned_data.csv - cleaned dataset](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/cleaned_data.csv) 
-- [date_a1c_df.csv- dataset with  observation date and a1c levels](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/date_a1c_df)
-- [new_df.csv - dataset used for modeling, each row represents a different patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/new_df)
+- [date_a1c_df.csv- dataset with  observation date and a1c levels](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/date_a1c_df.csv)
+- [new_df_for_modelling.csv - dataset used for modeling, each row represents a different patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/new_df_for_modelling.csv)
 - [sorted_sum_data.csv - dataset that includes patient visit information,average time between visits, and average a1c for each patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/sorted_sum_data.csv)
 - [summary_and_visit_df.csv - dataset that includes patient visit information](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/summary_and_visit_df)
-- [sorted_summary_with_avg_visits.csv - dataset that includes patient visit information and average time between visits for each patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/summary_and_visit_df)
+- [sorted_summary_with_avg_visits.csv - dataset that includes patient visit information and average time between visits for each patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/summary_and_visit_df.csv)
 
 
 
