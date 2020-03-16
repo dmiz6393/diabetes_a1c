@@ -1,4 +1,4 @@
-# Predicting Hemoglobin a1c Levels in Diabetes Patients Using Frequency of Visits 
+# Predicting Hemoglobin A1c Levels in Diabetes Patients Using Frequency of Visits 
 
 
 
@@ -31,33 +31,34 @@ The clinic's senior data analyst provided me with anonymized data (HIPPA complia
 |------|------|------|------|
 |   PatientId  | object|   A1c_Data_Requesta1c.csv | Original dataset patient id |
 |   Age  | object|   A1c_Data_Requesta1c.csv  | Original dataset patient age 
-|  Birthdate  | object|  A1c_Data_Requesta1c.csv  | Original dataset patient date of birth|
-|   VisitDate  | object|   A1c_Data_Requesta1c.csv  | Original dataset visit dates of patient|
-| SUMMARY  | object|   A1c_Data_Requesta1c.csv  |   Original dataset summary of patient visit|
-|  OBSDATE  | object|   A1c_Data_Requesta1c.csv |  Original dataset date patient got bloodwork done|
-|  Date of A1c | object|  A1c_Data_Requesta1c.csv  |  Original dataset patient a1c levels|
+|  Birthdate  | object|  A1c_Data_Requesta1c.csv  | Original dataset: patient date of birth|
+|   VisitDate  | object|   A1c_Data_Requesta1c.csv  | Original dataset: visit dates of patient|
+| SUMMARY  | object|   A1c_Data_Requesta1c.csv  |   Original dataset: summary of patient visit|
+|  OBSDATE  | object|   A1c_Data_Requesta1c.csv |  Original dataset: date patient got bloodwork done|
+|  Date of A1c | object|  A1c_Data_Requesta1c.csv  |  Original dataset: patient a1c levels|
 |  Insurance | object|   A1c_Data_Requesta1c.csv |  Original dataset patient insurance information |
 | patient_id | int |   cleaned_data.csv |  Part of the cleaned version of data :patient's id |
 | age | float|  cleaned_data.csv  |   Part of the cleaned version of data: patient's age|
 | visit_date| datetime |   cleaned_data.csv  | Part of the cleaned version of data: data of patient's visit|
-| summary | object|   cleaned_data.csv |  Cleaned |
-| obs_date | datetime|   cleaned_data.csv |  Cleaned |
-| a1c | float|   cleaned_data.csv |  Cleaned |
-| a1c_level | float|   cleaned_data.csv |  Cleaned |
-| patient_id| float|  new_df.csv  | Cleaned |
-| age | float|   new_df.csv |  Cleaned |
-| num_visits | float|   new_df.csv |  Cleaned |
-| avg_time_between_visits | float|   new_df.csv |  Cleaned |
-| avg_a1c | float|   new_df.csv |  Cleaned |
-| avg_control_level| float|   new_df.csv |  Cleaned |
-| num_obs| float|   new_df.csv |  Cleaned |
+| summary | object|   cleaned_data.csv |  Part of the cleaned version of data: summary of patient's visit |
+| obs_date | datetime|   cleaned_data.csv |   Part of the cleaned version of data: date that a patient got their blood drawn |
+| a1c | float|   cleaned_data.csv |  Part of the cleaned version of data: a1c of patient on date of observation |
+| a1c_level | float|   cleaned_data.csv |  Part of the cleaned version of data: a1c level of patient on date of observation |
+| patient_id| float|  new_df.csv  | Data used for modelling |
+| age | float|   new_df.csv |  Data used for modelling |
+| num_visits | float|   new_df.csv |  Data used for modelling|
+| avg_time_between_visits | float|   new_df.csv |  Data used for modelling |
+| avg_a1c | float|   new_df.csv |  Data used for modelling |
+| avg_control_level| float|   new_df.csv |  Data used for modelling|
+| num_obs| float|   new_df.csv |  Data used for modelling |
 
-### Data Files
-- [A1c_Data_Requesta1c.csv - original dataset](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_1.csv) 
-- [cleaned_data.csv - cleaned dataset](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_2.csv) 
-- [date_a1c_df- dataset with  observation date and a1c levels](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_3.csv)
-- [new_df - dataset used for modeling, each row represents a different patient](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_4.csv)
-- [sorted_sum_data.csv - dataset that includes patient visit information](https://git.generalassemb.ly/danielle-mizrachi/yelp/blob/master/data/combined_4.csv)
+### Data Files: What each file represents
+- [A1c_Data_Requesta1c.csv - original dataset](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/A1c_Data_Requesta1c.csv)
+- [cleaned_data.csv - cleaned dataset](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/cleaned_data.csv) 
+- [date_a1c_df.csv- dataset with  observation date and a1c levels](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/date_a1c_df)
+- [new_df.csv - dataset used for modeling, each row represents a different patient](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/new_df)
+- [sorted_sum_data.csv - dataset that includes patient visit information](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/sorted_sum_data.csv)
+- [summary_and_visit_df.csv - dataset that includes patient visit information](https://github.com/dmiz6393/diabetes_a1c/blob/master/data/summary_and_visit_df)
 
 
 ## Executive Summary
@@ -135,14 +136,20 @@ When attempting to predict average A1c of patient's based soley off of average t
 
 It is difficult to make any solid conclusions from this analysis given the limitations of the project and lack of knowledge on the subject matter. The task at hand was more challenging given how the data was gathered, stored, and pulled. The inconsistency of visits and when blood work drawn also acted as a limitation. Having to manipulate the data (taking the average number of days between visits and average a1c levels to model and make predictions) also doesn't seem like the optimal approach given how unreliable averages can be at times. 
 
+Finally, correlation does not mean causation - perhaps the patients who on average are controlled, come in for fewer visits since they don't feel the need to see a doctor. 
+
 
 ## Future Work
 
-I believe we can draw stronger conclusions if: 
+### Running an experiment to test hypothesis 
+I believe we can draw stronger conclusions if we could run a randomized experiment where patients had to come in every 1 month or 3 months for a visit and must get their bloodwork done on the date of visit. This would allow us to more accurately test the hypothesis that more frequent visits meant lower a1c levels. I'd also like to conduct more research to understand all factors that contribue to a patient's A1c level.  
 
-- We could run a randomized experiment where patients had to come in every 1 month or 3 months and get their bloodwork done on the date of visit, to test the hypothesis that more frequent visits meant lower a1c levels. 
-- The data was put together differently; Having one row per patient would have given us more clarity with how to approach modelling. 
+### Data Normalization 
+The data was put together differently; Having one row per patient would have given us more clarity with how to approach modelling. Perhaps having data on fewer patients but in an organized manner would also help with this type of analysis 
 
-Correlation does not mean causation - perhaps the patients who on average are controlled, come in for fewer visits since they don't feel the need to see a doctor. 
 
-I'd like to go back to make sure I've written my code efficiently. There are a few functions where I manipulate my data that could be more performative. For further investigation, we would need to do some hypothesis testing. I am going to continue to feature engineer to see if we've missed any important features that, when put together, impact a1c. I'd also like to experiment with cleaning the data differently - perhaps using the average levels for a1c and average time between visits wasn't the best approach. 
+### Clean Code 
+I'd like to go back to make sure I've written my code efficiently. There are a few functions where I manipulate my data that could be more performative. I'd also like to experiment with cleaning the data differently - perhaps using the average levels for a1c and average time between visits isn't the best way to look at the data. 
+
+### Feature Engineering 
+I am going to continue to feature engineer to see if we've missed any important features that, when put together, impact a1c. 
